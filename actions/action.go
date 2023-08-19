@@ -27,6 +27,8 @@ const (
 
 func GetAction(at ActionType) IAction {
 	switch at {
+	case LoginActionType:
+		return NewLoginAction()
 	default:
 		return nil
 	}

@@ -1,3 +1,6 @@
 package config
 
-const ServerAddress = "https://api.dotsync.org"
+const (
+	ServerAddress  = "https://api.dotsync.org"
+	ConfigFilePath = "~/.dotsyncrc"
+)
