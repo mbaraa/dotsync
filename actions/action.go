@@ -29,6 +29,8 @@ func GetAction(at ActionType) IAction {
 	switch at {
 	case LoginActionType:
 		return NewLoginAction()
+	case AddFileActionType:
+		return NewAddFileAction()
 	default:
 		return nil
 	}
