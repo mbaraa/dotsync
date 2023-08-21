@@ -31,6 +31,8 @@ func GetAction(at ActionType) IAction {
 		return NewLoginAction()
 	case AddFileActionType:
 		return NewAddFileAction()
+	case RemoveFileActionType:
+		return NewRemoveFileAction()
 	default:
 		return nil
 	}
