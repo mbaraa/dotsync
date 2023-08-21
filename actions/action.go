@@ -33,6 +33,8 @@ func GetAction(at ActionType) IAction {
 		return NewAddFileAction()
 	case RemoveFileActionType:
 		return NewRemoveFileAction()
+	case ListFilesActionType:
+		return NewListFilesAction()
 	default:
 		return nil
 	}
