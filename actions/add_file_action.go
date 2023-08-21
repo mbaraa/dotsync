@@ -57,6 +57,11 @@ func (a *AddFileAction) addFile(filePath string) error {
 
 	fmt.Fprintf(a.output, "Adding %s to your synced files...\n", filePath)
 
+	content, err := io.ReadAll(file)
+	if err != nil {
+		return err
+	}
+
 	reqBody := bytes.NewBuffer([]byte{})
 	_ = json.StringifyToWriter(reqBody, map[string]string{
 		"path":    filePath,
