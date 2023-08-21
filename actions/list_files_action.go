@@ -60,7 +60,7 @@ func (l *ListFilesAction) listFiles() error {
 
 	files, err := json.ParseFromReader[[]string](resp.Body)
 	if err != nil {
-		return nil
+		return err
 	}
 	resp.Body.Close()
 

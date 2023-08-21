@@ -65,7 +65,7 @@ func (d *DownloadFilesAction) downloadFiles() error {
 		Content string `json:"content"`
 	}](resp.Body)
 	if err != nil {
-		return nil
+		return err
 	}
 	resp.Body.Close()
 	fmt.Fprintln(d.output, "done 👍")
