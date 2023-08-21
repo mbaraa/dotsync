@@ -58,9 +58,7 @@ func (l *ListFilesAction) listFiles() error {
 		return errors.New("something went wrong...")
 	}
 
-	files, err := json.ParseFromReader[[]struct {
-		Path string `json:"path"`
-	}](resp.Body)
+	files, err := json.ParseFromReader[[]string](resp.Body)
 	if err != nil {
 		return nil
 	}
@@ -68,7 +66,7 @@ func (l *ListFilesAction) listFiles() error {
 
 	fmt.Fprintln(l.output, "Your current synced files:")
 	for _, file := range files {
-		fmt.Fprintln(l.output, file.Path)
+		fmt.Fprintln(l.output, file)
 	}
 
 	return nil
