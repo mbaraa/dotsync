@@ -41,9 +41,18 @@ func (a *AddFileAction) HasArgs() bool {
 }
 
 func (a *AddFileAction) addFile(filePath string) error {
-	content, err := os.ReadFile(filePath)
+	file, err := os.Open(filePath)
 	if err != nil {
 		return err
+	}
+
+	stat, err := file.Stat()
+	if err != nil {
+		return err
+	}
+
+	if stat.Size() > 256*1024 {
+		return errors.New("file is larger than 256KiB...")
 	}
 
 	fmt.Fprintf(a.output, "Adding %s to your synced files...\n", filePath)
