@@ -2,6 +2,7 @@ package actions
 
 import (
 	"bytes"
+	"encoding/base64"
 	"errors"
 	"fmt"
 	"io"
@@ -68,10 +69,12 @@ func (a *AddFileAction) addFile(filePath string) error {
 		return err
 	}
 
+	encContent := base64.StdEncoding.EncodeToString(content)
+
 	reqBody := bytes.NewBuffer([]byte{})
 	_ = json.StringifyToWriter(reqBody, map[string]string{
 		"path":    filePath,
-		"content": string(content),
+		"content": encContent,
 	})
 
 	req, err := http.NewRequest("POST", config.ServerAddress+"/file", reqBody)
