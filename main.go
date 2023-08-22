@@ -11,6 +11,8 @@ const (
 	usageStr = `Usage of Dotsync:
 -login string:email
 	login into your account, or create an account using a valid email.
+-delete-user
+	delete your current logged in user, along with the remote files.
 -list
 	lists the files that are currently synced.
 -add string:file_path
