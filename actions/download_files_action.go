@@ -55,9 +55,10 @@ func (d *DownloadFilesAction) downloadFiles() error {
 		return err
 	}
 
-	// TODO: handle different occuring errors
 	if resp.StatusCode != 200 {
-		return errors.New("something went wrong...")
+		respBody, _ := json.ParseFromReader[json.Json](resp.Body)
+		resp.Body.Close()
+		return errors.New(respBody["error"].(string))
 	}
 
 	files, err := json.ParseFromReader[[]struct {

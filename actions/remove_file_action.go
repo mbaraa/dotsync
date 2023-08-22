@@ -10,6 +10,7 @@ import (
 
 	"github.com/mbaraa/dotsync/config"
 	"github.com/mbaraa/dotsync/utils/configfile"
+	"github.com/mbaraa/dotsync/utils/json"
 )
 
 type RemoveFileAction struct {
@@ -71,9 +72,10 @@ func (r *RemoveFileAction) removeFile(filePath string) error {
 		return err
 	}
 
-	// TODO: handle different occuring errors
 	if resp.StatusCode != 200 {
-		return errors.New("something went wrong...")
+		respBody, _ := json.ParseFromReader[json.Json](resp.Body)
+		resp.Body.Close()
+		return errors.New(respBody["error"].(string))
 	}
 
 	fmt.Fprintln(r.output, "Done, you can check the synced files list by using `dotsync -list`")

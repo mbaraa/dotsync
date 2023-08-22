@@ -101,9 +101,10 @@ func (u *UploadFilesAction) uploadFiles() error {
 		return err
 	}
 
-	// TODO: handle different occuring errors
 	if resp.StatusCode != 200 {
-		return errors.New("something went wrong...")
+		respBody, _ := json.ParseFromReader[json.Json](resp.Body)
+		resp.Body.Close()
+		return errors.New(respBody["error"].(string))
 	}
 	fmt.Fprintln(u.output, "done 👍")
 
@@ -125,9 +126,10 @@ func (u *UploadFilesAction) listFiles() ([]string, error) {
 		return nil, err
 	}
 
-	// TODO: handle different occuring errors
 	if resp.StatusCode != 200 {
-		return nil, errors.New("something went wrong while fetching the file's list...")
+		respBody, _ := json.ParseFromReader[json.Json](resp.Body)
+		resp.Body.Close()
+		return nil, errors.New(respBody["error"].(string))
 	}
 
 	files, err := json.ParseFromReader[[]string](resp.Body)
