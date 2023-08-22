@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"strings"
 
 	"github.com/mbaraa/dotsync/config"
 	"github.com/mbaraa/dotsync/utils/configfile"
@@ -67,14 +66,8 @@ func (l *ListFilesAction) listFiles() error {
 	resp.Body.Close()
 
 	fmt.Fprintln(l.output, "Your current synced files:")
-	fmt.Fprintln(l.output, "| file name | file path |")
-	for _, filePath := range files {
-		fileName := filePath
-		lastSlashIndex := strings.LastIndex(filePath, "/")
-		if lastSlashIndex != -1 {
-			fileName = filePath[lastSlashIndex+1:]
-		}
-		fmt.Fprintf(l.output, "| %s | %s |\n", fileName, filePath)
+	for i, filePath := range files {
+		fmt.Fprintf(l.output, "%d) %s\n", i+1, filePath)
 	}
 
 	return nil
