@@ -2,6 +2,7 @@ package actions
 
 import (
 	"bytes"
+	"encoding/base64"
 	"errors"
 	"fmt"
 	"io"
@@ -70,12 +71,13 @@ func (u *UploadFilesAction) uploadFiles() error {
 			return err
 		}
 
+		encContent := base64.StdEncoding.EncodeToString(content)
 		updateList = append(updateList, struct {
 			Path    string `json:"path"`
 			Content string `json:"content"`
 		}{
 			Path:    filePath,
-			Content: string(content),
+			Content: encContent,
 		})
 
 	}
