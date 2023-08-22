@@ -7,6 +7,7 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"path/filepath"
 
 	"github.com/mbaraa/dotsync/config"
 	"github.com/mbaraa/dotsync/utils/configfile"
@@ -58,6 +59,11 @@ func (a *AddFileAction) addFile(filePath string) error {
 	fmt.Fprintf(a.output, "Adding %s to your synced files...\n", filePath)
 
 	content, err := io.ReadAll(file)
+	if err != nil {
+		return err
+	}
+
+	filePath, err = filepath.Abs(filePath)
 	if err != nil {
 		return err
 	}
