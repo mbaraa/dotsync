@@ -18,6 +18,7 @@ type ActionType string
 
 const (
 	LoginActionType         ActionType = "-login"
+	DeleteUserActionType    ActionType = "-delete-user"
 	AddFileActionType       ActionType = "-add"
 	RemoveFileActionType    ActionType = "-remove"
 	ListFilesActionType     ActionType = "-list"
@@ -29,6 +30,8 @@ func GetAction(at ActionType) IAction {
 	switch at {
 	case LoginActionType:
 		return NewLoginAction()
+	case DeleteUserActionType:
+		return NewDeleteUserAction()
 	case AddFileActionType:
 		return NewAddFileAction()
 	case RemoveFileActionType:
