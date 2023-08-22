@@ -1,6 +1,7 @@
 package actions
 
 import (
+	"encoding/base64"
 	"errors"
 	"fmt"
 	"io"
@@ -87,7 +88,8 @@ func (d *DownloadFilesAction) downloadFiles() error {
 			continue
 		}
 
-		_, err = fmt.Fprint(f, file.Content)
+		decContent, _ := base64.StdEncoding.DecodeString(file.Content)
+		_, err = f.Write(decContent)
 		if err != nil {
 			fmt.Fprintf(d.output, "saving file %s failed, reason: %s", file.Path, err.Error())
 			continue
