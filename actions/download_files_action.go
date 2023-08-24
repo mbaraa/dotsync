@@ -77,12 +77,12 @@ func (d *DownloadFilesAction) downloadFiles() error {
 		fmt.Fprintf(d.output, "saving file %s...", file.Path)
 
 		err = os.Truncate(file.Path, 0)
-		if err != nil {
+		if err != nil && !os.IsNotExist(err) {
 			fmt.Fprintln(d.output, err.Error())
 			continue
 		}
 
-		f, err := os.OpenFile(file.Path, os.O_RDWR, 0755)
+		f, err := os.OpenFile(file.Path, os.O_CREATE|os.O_RDWR, 0755)
 		if err != nil {
 			fmt.Fprintf(d.output, "opening file %s failed, reason: %s", file.Path, err.Error())
 			continue

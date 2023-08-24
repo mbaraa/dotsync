@@ -15,8 +15,8 @@ const (
 	delete your current logged in user, along with the remote files.
 -list
 	lists the files that are currently synced.
--add string:file_path
-	adds a file to the sync list.
+-add string:path
+	adds a file or directory to the sync list.
 -remove string:file_path
 	removes a file from the sync list.
 -download
