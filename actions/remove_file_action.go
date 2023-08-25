@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"os"
 	"strings"
 
 	"github.com/mbaraa/dotsync/config"
@@ -41,11 +40,6 @@ func (r *RemoveFileAction) HasArgs() bool {
 }
 
 func (r *RemoveFileAction) removeFile(filePath string) error {
-	_, err := os.Open(filePath)
-	if err != nil {
-		return err
-	}
-
 	fmt.Fprintf(r.output, "Remove '%s' from your synced files? [y|N] ", filePath)
 	var choice string
 	fmt.Scanln(&choice)
