@@ -8,22 +8,25 @@ A small, free, open-source, blazingly fast dotfiles synchronizer!
 
 Dotsync's [server](https://github.com/mbaraa/dotsync_server) is the middleware between your connected computers, where all of your dotfiles stand there encrypted, and backed up!
 
-***
-
 ## Features:
 
-- Free (of charge & evil data telemetry things)
+- Efficient
+- Lightweight
+- Blazingly Fast
+- Cool Stack
 - Open-source
+- Free (of charge & evil data telemetry things)
 - Self-hosting option, check [the server](https://github.com/mbaraa/dotsync_server)
 
 ## Dependencies:
 
 *   [go](https://golang.org)
 *   An internet connection
+*   Linux or Unix-like system (I haven't tried it on Windows, a feedback is more than welcome)
 *   A bunch of dotfiles to sync :)
 
 ## Installation:
-
+<!---
 ### Using a Package Manager:
 
 #### Gentoo
@@ -34,7 +37,7 @@ Dotsync's [server](https://github.com/mbaraa/dotsync_server) is the middleware b
 #### Arch (AUR)
 
 install [dotsync2](https://aur.archlinux.org/packages/dotsync2) -- I realized later on that an AUR package exists...
-
+-->
 ### Using Go's installer
 
 ```bash
@@ -79,3 +82,5 @@ dotsync -upload
 # you need to login first, so...
 dotsync -download
 ```
+
+**For a more detailed usage, visit the [Officical Docs](https://dotsync.org/docs)**!
