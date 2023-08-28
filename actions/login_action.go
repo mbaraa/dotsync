@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"strings"
 	"time"
 
 	"github.com/mbaraa/dotsync/config"
@@ -25,11 +26,6 @@ func (l *LoginAction) Exec(output io.Writer, args ...any) error {
 	l.output = output
 
 	err := l.login(args[0].(string))
-	if err != nil {
-		return err
-	}
-
-	err = l.storeToken()
 	if err != nil {
 		return err
 	}
@@ -64,18 +60,34 @@ func (l *LoginAction) login(email string) error {
 		return errors.New("something went wrong...")
 	}
 
+	respBody, err := json.ParseFromReader[json.Json](resp.Body)
+	if err != nil {
+		return err
+	}
+
+	var token string
+	if tok, ok := respBody["token"].(string); ok {
+		token = tok
+	}
+
 	fmt.Fprintf(l.output, "An email was sent to %s, with the login token.\n", email)
 	fmt.Fprintln(l.output, "Copy the token and paste it here to complete the login process.")
 
-	return nil
+	return l.storeToken(token)
 }
 
-func (l *LoginAction) storeToken() error {
+func (l *LoginAction) storeToken(midPart string) error {
 	fmt.Fprint(l.output, "\nEnter the login token: ")
 	var loginToken string
 	fmt.Scanln(&loginToken)
 
-	fmt.Fprintln(l.output, "\nChecking your token, hope you're using your token 😕")
+	tokenParts := strings.Split(loginToken, "🔒")
+	if len(tokenParts) != 2 {
+		return errors.New("invalid token")
+	}
+	loginToken = fmt.Sprintf("%s.%s.%s", tokenParts[0], midPart, tokenParts[1])
+
+	fmt.Fprintln(l.output, "\nChecking your token, hope you're using your token")
 	reqBody := bytes.NewBuffer([]byte{})
 	_ = json.StringifyToWriter(reqBody, map[string]string{
 		"token": loginToken,
@@ -102,7 +114,12 @@ func (l *LoginAction) storeToken() error {
 		return err
 	}
 
-	err = configfile.SetValue("token", respBody["token"].(string))
+	var token string
+	if tok, ok := respBody["token"].(string); ok {
+		token = tok
+	}
+
+	err = configfile.SetValue("token", token)
 	if err != nil {
 		return err
 	}
