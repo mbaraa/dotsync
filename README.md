@@ -1,12 +1,18 @@
 # Dotsync
 
 [![GoDoc](https://godoc.org/github.com/mbaraa/dotsync?status.png)](https://godoc.org/github.com/mbaraa/dotsync)
+.
 [![build](https://github.com/mbaraa/dotsync/actions/workflows/build.yml/badge.svg)](https://github.com/mbaraa/dotsync/actions/workflows/build.yml)
+.
 [![Go Report Card](https://goreportcard.com/badge/github.com/mbaraa/dotsync)](https://goreportcard.com/report/github.com/mbaraa/dotsync)
+.
+[![server-rex-deploy](https://github.com/mbaraa/dotsync/actions/workflows/server-rex-deploy.yml/badge.svg)](https://github.com/mbaraa/dotsync/actions/workflows/server-rex-deploy.yml)
+.
+[![website-rex-deploy](https://github.com/mbaraa/dotsync/actions/workflows/website-rex-deploy.yml/badge.svg)](https://github.com/mbaraa/dotsync/actions/workflows/website-rex-deploy.yml)
 
 A small, free, open-source, blazingly fast dotfiles synchronizer!
 
-Dotsync's [server](https://github.com/mbaraa/dotsync_server) is the middleware between your connected computers, where all of your dotfiles stand there encrypted, and backed up!
+Dotsync's [server](/server) is the middleware between your connected computers, where all of your dotfiles stand there encrypted, and backed up!
 
 ## Features:
 
@@ -16,16 +22,17 @@ Dotsync's [server](https://github.com/mbaraa/dotsync_server) is the middleware b
 - Cool Stack
 - Open-source
 - Free (of charge & evil data telemetry things)
-- Self-hosting option, check [the server](https://github.com/mbaraa/dotsync_server)
+- Self-hosting option, check [the server](/server)
 
 ## Dependencies:
 
-*   [go](https://golang.org)
-*   An internet connection
-*   Linux or Unix-like system (I haven't tried it on Windows, a feedback is more than welcome)
-*   A bunch of dotfiles to sync :)
+- [go](https://golang.org)
+- An internet connection
+- Linux or Unix-like system (I haven't tried it on Windows, a feedback is more than welcome)
+- A bunch of dotfiles to sync :)
 
 ## Installation:
+
 <!---
 ### Using a Package Manager:
 
@@ -38,6 +45,7 @@ Dotsync's [server](https://github.com/mbaraa/dotsync_server) is the middleware b
 
 install [dotsync2](https://aur.archlinux.org/packages/dotsync2) -- I realized later on that an AUR package exists...
 -->
+
 ### Using Go's installer
 
 ```bash
@@ -56,9 +64,11 @@ sudo make install
 And as mentioned above your email is encrypted, and won't be shared with anyone!
 
 1. Login
+
 ```bash
 dotsync -login someone@example.com
 ```
+
 2. Enter the token which you recived as an email(it might arrive as a spam email)
 
 3. Go nuts
@@ -78,6 +88,7 @@ dotsync -upload
 ```
 
 2. Download your files on another computer to show the power of Dotsync
+
 ```bash
 # you need to login first, so...
 dotsync -download
