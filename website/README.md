@@ -1,6 +1,6 @@
 # Dotsync's website
 
-[![rex-deploy](https://github.com/mbaraa/dotsync_website/actions/workflows/rex-deploy.yml/badge.svg)](https://github.com/mbaraa/dotsync_website/actions/workflows/rex-deploy.yml)
+[![website-rex-deploy](https://github.com/mbaraa/dotsync/actions/workflows/website-rex-deploy.yml/badge.svg)](https://github.com/mbaraa/dotsync/actions/workflows/website-rex-deploy.yml)
 
 This is the website of [Dotsync](https://github.com/mbaraa/dotsync), IDK, it seems cute to have a landing page and docs outside the repo's readme!
 
