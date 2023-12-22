@@ -1,0 +1,35 @@
+/* Write your global styles here, in PostCSS syntax */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+div {
+	scroll-behavior: smooth;
+}
+
+@layer base {
+	@font-face {
+		font-family: "Terminus";
+		font-weight: 400;
+		font-style: normal;
+		font-display: swap;
+		src: url("/fonts/TerminusTTF-4.49.3.ttf");
+	}
+
+	@font-face {
+		font-family: "Terminus";
+		font-weight: 700;
+		font-style: normal;
+		font-display: swap;
+		src: url("/fonts/TerminusTTF-Bold-4.49.3.ttf");
+	}
+
+	@font-face {
+		font-family: "Terminus";
+		font-weight: 400;
+		font-style: italic;
+		font-display: swap;
+		src: url("/fonts/TerminusTTF-Italic-4.49.3.ttf");
+	}
+}
