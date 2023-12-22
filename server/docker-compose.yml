@@ -1,0 +1,73 @@
+version: "3.8"
+
+services:
+  dotsync-db:
+    image: "mariadb:10.6"
+    container_name: "dotsync-db"
+    restart: "always"
+    environment:
+      MARIADB_ROOT_PASSWORD: "hello"
+      MARIADB_DATABASE: "dotsync"
+    ports:
+      - "3306"
+    volumes:
+      - db-config:/etc/mysql
+      - db-data:/var/lib/mysql
+    networks:
+      - dotsync
+
+  dotsync-server:
+    build:
+      dockerfile: Dockerfile
+      context: "."
+      args:
+        - PORT
+        - SECRET_KEY_BASE
+        - DB_NAME
+        - DB_SERVER
+        - DB_USERNAME
+        - DB_PASSWORD
+        - DB_URL="mysql://root:hello@dotsync-db/dotsync?parseTime=True&loc=Local"
+        - SMTP_SERVER
+        - SMTP_PORT
+        - SMTP_USERNAME
+        - SMTP_PASSWORD
+
+    container_name: "dotsync-server"
+    depends_on:
+      - dotsync-db
+    # restart: "unless-stopped"
+    restart: "always"
+    ports:
+      - "2388:8080"
+    env_file: ./.env.docker
+    environment:
+      UPLOAD_DIRECTORY: "/uploads"
+    volumes:
+      - upload-dir:/uploads
+    stdin_open: true
+    networks:
+      - dotsync
+
+volumes:
+  db-config:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./_database/etc/
+  db-data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./_database/var/
+  upload-dir:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./_uploads/
+
+networks:
+  dotsync: {}
