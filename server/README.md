@@ -1,6 +1,6 @@
 # Dotsync's server
 
-[![rex-deploy](https://github.com/mbaraa/dotsync_server/actions/workflows/rex-deploy.yml/badge.svg)](https://github.com/mbaraa/dotsync_server/actions/workflows/rex-deploy.yml)
+[![server-rex-deploy](https://github.com/mbaraa/dotsync/actions/workflows/server-rex-deploy.yml/badge.svg)](https://github.com/mbaraa/dotsync/actions/workflows/server-rex-deploy.yml)
 
 This is the server of [Dotsync](https://github.com/mbaraa/dotsync), where it stores all the synced dotfiles securely.
 
