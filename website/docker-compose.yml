@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  dotsync-website:
+    build:
+      dockerfile: Dockerfile
+      context: "."
+    restart: "always"
+    environment:
+      - PORT=8082
+    ports:
+      - "2389:8082"
+    stdin_open: true

@@ -1,0 +1,10 @@
+/_*/
+/.elixir_ls/
+/cover/
+/deps/
+/doc/
+/.fetch
+erl_crash.dump
+*.ez
+/tmp/
+dotsync-*.tar
