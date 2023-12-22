@@ -11,6 +11,8 @@ on:
   pull_request:
     paths-ignore:
       - "**.md"
+      - "website/**"
+      - "server/**"
 
 jobs:
   build:

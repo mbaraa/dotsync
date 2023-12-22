@@ -7,8 +7,8 @@ on:
     paths:
       - "server/**"
   pull_request:
-    paths-ignore:
-      - "**.md"
+    paths:
+      - "server/**"
 
 jobs:
   rex-deploy:
