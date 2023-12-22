@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - main
-    paths-ignore:
-      - "**.md"
+    paths:
+      - "website/**"
   pull_request:
     paths-ignore:
       - "**.md"
